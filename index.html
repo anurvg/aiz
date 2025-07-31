@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JARVAS | AI Assistant</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+    }
+    body {
+      background-color: #0a0a0a;
+      color: #00ffcc;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      padding: 1rem;
+      background: #111;
+      text-align: center;
+      font-size: 1.5rem;
+      border-bottom: 1px solid #00ffcc;
+      letter-spacing: 3px;
+    }
+    #terminal {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      background-color: #0a0a0a;
+    }
+    .msg {
+      margin: 0.5rem 0;
+    }
+    .user {
+      color: #00ffff;
+    }
+    .jarvas {
+      color: #ffffff;
+    }
+    #input-bar {
+      padding: 1rem;
+      background: #111;
+      display: flex;
+    }
+    #command {
+      flex: 1;
+      background: #000;
+      color: #0f0;
+      padding: 0.75rem;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      border: 1px solid #00ffcc;
+    }
+    button {
+      background: #00ffcc;
+      color: #000;
+      padding: 0.75rem 1rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>JARVAS // ONLINE</header>
+  <div id="terminal"></div>
+  <div id="input-bar">
+    <input type="text" id="command" placeholder="Ask JARVAS..." autofocus />
+    <button onclick="sendCommand()">Send</button>
+  </div>
+
+  <script>
+    const terminal = document.getElementById("terminal");
+    const input = document.getElementById("command");
+
+    function sendCommand() {
+      const value = input.value.trim();
+      if (value === "") return;
+
+      addMessage("user", value);
+      input.value = "";
+
+      // Placeholder AI response
+      setTimeout(() => {
+        addMessage("jarvas", "Analyzing... (AI not linked yet)");
+      }, 500);
+    }
+
+    function addMessage(role, text) {
+      const msg = document.createElement("div");
+      msg.classList.add("msg", role);
+      msg.textContent = role === "user" ? `> ${text}` : `JARVAS: ${text}`;
+      terminal.appendChild(msg);
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+  </script>
+</body>
+</html>
